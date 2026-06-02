@@ -1537,9 +1537,219 @@
       <div class="final-badge"><span>🌹</span><span>La quiero y la querre mucho siempre</span><span>🌹</span></div>
       <p class="footer-txt" style="margin-top:3rem;">Hecho con ❤️ especialmente para Angie, por su chamo</p>
       <br><br>
+
+      <!-- GIFT BUTTON -->
+      <div style="margin-top:2rem;">
+        <button id="giftBtn" onclick="document.getElementById('giftModal').classList.add('open')">
+          <span class="gift-btn-shine"></span>
+          <span class="gift-btn-inner">
+            <span class="gift-icon">🎁</span>
+            <span class="gift-btn-text">
+              <span class="gift-btn-top">Un regalito más...</span>
+              <span class="gift-btn-sub">Toque para abrirlo ✦</span>
+            </span>
+          </span>
+        </button>
+      </div>
+      <br><br>
     </section>
 
+    <!-- ═══ GIFT MODAL ═══ -->
+    <div id="giftModal" class="gift-modal-overlay">
+      <div class="gift-modal-box">
+        <!-- decorative rings -->
+        <div class="gm-ring gm-ring-1"></div>
+        <div class="gm-ring gm-ring-2"></div>
+
+        <button class="gm-close" onclick="document.getElementById('giftModal').classList.remove('open')">✕</button>
+
+        <div class="gm-header">
+          <span class="gm-miku-icon">🎵</span>
+          <p class="gm-pretitle">✦ pipi pa ti ✦</p>
+          <h2 class="gm-title">Hatsune Miku<br><span>Project DIVA Mega Mix+</span></h2>
+        </div>
+
+        <div class="gm-divider"><span>✦</span></div>
+
+        <p class="gm-desc">
+          Miku es única una voz que no pertenece a nadie y a la vez pertenece a todos los que la aman.
+          Como usted, vive en un universo propio, lleno de color, creatividad y una energía que no tiene
+          comparación. Pensé en usted desde el primer segundo, porque algo tan
+          especial solo puede ser para alguien igual de especial. 👑
+        </p>
+
+        <div class="gm-divider"><span>🌸</span></div>
+
+        <div class="gm-code-section">
+          <p class="gm-code-label">✦ código de Steam ✦</p>
+          <div class="gm-code-box" id="giftCodeBox">
+            <span class="gm-code-text" id="giftCode">xxxxx-xxxxx-xxxx</span>
+            <button class="gm-copy-btn" id="copyBtn" onclick="copyCode()">
+              <span id="copyLabel">Copiar</span>
+            </button>
+          </div>
+          <p class="gm-code-hint">Canjeelo en Steam → Juegos → Activar un producto</p>
+        </div>
+
+        <div class="gm-footer">
+          <span>🌹</span>
+          <span class="gm-footer-txt">Con todo el cariño del mundo: Miguel</span>
+          <span>🌹</span>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /content -->
+
+  <style>
+    /* ═══ GIFT BUTTON ═══ */
+    #giftBtn {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      background: linear-gradient(135deg, rgba(200,10,40,0.35), rgba(180,130,0,0.25), rgba(200,10,40,0.35));
+      border: 1.5px solid rgba(245,200,66,0.45);
+      border-radius: 60px;
+      padding: 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: giftGlow 3s ease-in-out infinite;
+    }
+    #giftBtn:hover { transform: scale(1.05); }
+    @keyframes giftGlow {
+      0%,100% { box-shadow: 0 0 18px rgba(220,30,30,0.3), 0 0 40px rgba(200,140,0,0.15); }
+      50%      { box-shadow: 0 0 35px rgba(220,30,30,0.5), 0 0 70px rgba(200,140,0,0.25); }
+    }
+    .gift-btn-shine {
+      position: absolute; inset: 0; border-radius: 60px;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+      background-size: 200% 100%;
+      animation: btnShine 3s linear infinite;
+    }
+    @keyframes btnShine { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .gift-btn-inner {
+      position: relative; display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 2.5rem;
+    }
+    .gift-icon { font-size: 2.2rem; animation: iconFloat 2s ease-in-out infinite; display: block; }
+    .gift-btn-text { display: flex; flex-direction: column; text-align: left; }
+    .gift-btn-top {
+      font-family: 'Dancing Script', cursive; font-size: 1.4rem;
+      background: linear-gradient(135deg, var(--gold-l), #fff3c0, #ff8844);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .gift-btn-sub {
+      font-family: 'Orbitron', monospace; font-size: 0.55rem; letter-spacing: 4px;
+      color: rgba(255,220,180,0.55); margin-top: 0.2rem;
+    }
+
+    /* ═══ GIFT MODAL ═══ */
+    .gift-modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(10px);
+      display: none; align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .gift-modal-overlay.open { display: flex; }
+
+    .gift-modal-box {
+      position: relative; max-width: 580px; width: 100%;
+      background: linear-gradient(145deg, #130008, #1c000e, #0e0018);
+      border: 1.5px solid transparent;
+      background-clip: padding-box;
+      border-radius: 28px; padding: 3rem 2.5rem 2.5rem;
+      box-shadow: 0 0 80px rgba(220,20,60,0.25), 0 0 40px rgba(180,120,0,0.15);
+      text-align: center; overflow: hidden;
+      animation: modalPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+      outline: 1.5px solid rgba(220,130,50,0.35);
+      outline-offset: 0;
+    }
+    @keyframes modalPop { from{opacity:0;transform:scale(0.8) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+    /* decorative rings inside modal */
+    .gm-ring { position:absolute; border-radius:50%; border:1px solid rgba(220,50,50,0.08); pointer-events:none; }
+    .gm-ring-1 { width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%); animation:ringPulse 4s ease-in-out infinite; }
+    .gm-ring-2 { width:350px;height:350px;top:50%;left:50%;transform:translate(-50%,-50%); border-color:rgba(200,140,0,0.07); animation:ringPulse 4s ease-in-out 1s infinite; }
+
+    .gm-close {
+      position:absolute; top:1rem; right:1rem;
+      background:rgba(200,0,30,0.5); border:none; color:#fff;
+      width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem;
+      display:flex; align-items:center; justify-content:center; transition:background 0.2s;
+      z-index:1;
+    }
+    .gm-close:hover { background:rgba(200,0,30,0.8); }
+
+    .gm-header { position:relative; margin-bottom:1.2rem; }
+    .gm-miku-icon {
+      font-size:3.5rem; display:block; margin-bottom:0.8rem;
+      filter: drop-shadow(0 0 15px rgba(0,220,200,0.6));
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+    .gm-pretitle {
+      font-family:'Orbitron',monospace; font-size:0.58rem; letter-spacing:5px;
+      color:rgba(0,220,200,0.6); text-transform:uppercase; margin-bottom:0.8rem;
+    }
+    .gm-title {
+      font-family:'Dancing Script',cursive; font-size:clamp(1.8rem,5vw,2.6rem);
+      color:#fff8f0; line-height:1.2;
+    }
+    .gm-title span {
+      background: linear-gradient(135deg, #00e5cc, #88ffee, #00bfaa);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      font-size:clamp(1.3rem,4vw,2rem);
+    }
+
+    .gm-divider {
+      display:flex; align-items:center; gap:0.8rem; margin:1.4rem 0;
+    }
+    .gm-divider::before,.gm-divider::after {
+      content:''; flex:1; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(220,150,50,0.3),transparent);
+    }
+    .gm-divider span { font-size:1rem; filter:drop-shadow(0 0 4px rgba(220,150,0,0.5)); }
+
+    .gm-desc {
+      font-size:0.92rem; line-height:1.85; color:rgba(255,235,210,0.82);
+      font-family:'Quicksand',sans-serif; position:relative;
+    }
+
+    .gm-code-section { margin-top:0.5rem; }
+    .gm-code-label {
+      font-family:'Orbitron',monospace; font-size:0.58rem; letter-spacing:5px;
+      color:var(--gold-l); text-transform:uppercase; margin-bottom:0.9rem;
+    }
+    .gm-code-box {
+      display:flex; align-items:center; justify-content:center; gap:0.8rem;
+      background:rgba(0,0,0,0.4); border:1px solid rgba(245,200,66,0.3);
+      border-radius:14px; padding:1rem 1.5rem; margin-bottom:0.7rem;
+      flex-wrap:wrap;
+    }
+    .gm-code-text {
+      font-family:'Orbitron',monospace; font-size:clamp(1rem,3vw,1.25rem);
+      letter-spacing:4px; color:#fff3c0;
+      text-shadow:0 0 12px rgba(245,200,66,0.5);
+    }
+    .gm-copy-btn {
+      background:linear-gradient(135deg,rgba(200,10,40,0.5),rgba(160,100,0,0.4));
+      border:1px solid rgba(245,200,66,0.35); border-radius:8px;
+      color:var(--gold-l); font-family:'Orbitron',monospace; font-size:0.6rem;
+      letter-spacing:2px; padding:0.45rem 1rem; cursor:pointer; transition:all 0.2s;
+    }
+    .gm-copy-btn:hover { background:linear-gradient(135deg,rgba(200,10,40,0.75),rgba(160,100,0,0.6)); }
+    .gm-code-hint {
+      font-size:0.75rem; color:rgba(255,220,180,0.35);
+      font-family:'Orbitron',monospace; letter-spacing:2px;
+    }
+
+    .gm-footer {
+      display:flex; align-items:center; justify-content:center; gap:0.8rem;
+      margin-top:1.8rem;
+    }
+    .gm-footer-txt {
+      font-family:'Dancing Script',cursive; font-size:1.1rem;
+      color:rgba(255,230,200,0.7);
+    }
+  </style>
 
   <script>
     // CURSOR
@@ -1647,6 +1857,20 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 
     renderGallery();
+
+    // GIFT CODE COPY
+    function copyCode() {
+      const code = document.getElementById('giftCode').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const label = document.getElementById('copyLabel');
+        label.textContent = '¡Copiado!';
+        document.getElementById('copyBtn').style.background = 'linear-gradient(135deg,rgba(0,180,140,0.6),rgba(0,120,100,0.5))';
+        setTimeout(() => {
+          label.textContent = 'Copiar';
+          document.getElementById('copyBtn').style.background = '';
+        }, 2500);
+      });
+    }
   </script>
 </body>
 
